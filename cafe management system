@@ -1,0 +1,165 @@
+Decorativedef display_menu(menu): 
+
+    print("\n--- Cafe Menu ---") 
+
+    for item, price in menu.items(): 
+
+        print(f"{item}: ${price:.2f}") 
+
+  
+
+def take_order(menu): 
+
+    order = {} 
+
+    while True: 
+
+        item = input("\nEnter an item from the menu (or 'done' to finish): ").capitalize() 
+
+        if item == 'Done': 
+
+            break 
+
+        elif item in menu: 
+
+            try: 
+
+                quantity = int(input(f"Enter quantity for {item}: ")) 
+
+                if quantity > 0: 
+
+                    if item in order: 
+
+                        order[item] += quantity 
+
+                    else: 
+
+                        order[item] = quantity 
+
+                    print(f"Added {quantity} {item}(s) to your order.") 
+
+                else: 
+
+                    print("Quantity must be greater than 0.") 
+
+            except ValueError: 
+
+                print("Please enter a valid number for quantity.") 
+
+        else: 
+
+            print(f"Sorry, {item} is not on the menu.") 
+
+    return order 
+
+  
+
+def calculate_total(menu, order): 
+
+    total = 0 
+
+    for item, quantity in order.items(): 
+
+        total += menu[item] * quantity 
+
+    return total 
+
+  
+
+def generate_bill(menu, order): 
+
+    print("\n--- Your Bill ---") 
+
+    if not order: 
+
+        print("No items ordered.") 
+
+    else: 
+
+        for item, quantity in order.items(): 
+
+            cost = menu[item] * quantity 
+
+            print(f"{item} x{quantity}: ${cost:.2f}") 
+
+        total = calculate_total(menu, order) 
+
+        print(f"Total: ${total:.2f}") 
+
+    print("Thank you for visiting!") 
+
+  
+
+def cafe_management_system(): 
+
+    menu = { 
+
+        'Coffee': 2.5, 
+
+        'Tea': 1.5, 
+
+        'Sandwich': 5.0, 
+
+        'Cake': 3.0, 
+
+        'Latte': 3.5, 
+
+        'Samosa': 1.5, 
+
+        'Muffin': 2.5, 
+
+        'Paratha': 3.0, 
+
+        'Idli': 2.8, 
+
+        'Smoothie': 4.5, 
+
+        'Salad': 6.0, 
+
+        'Soup': 4.0, 
+
+        'Hot Chocolate': 2.5, 
+
+        'Pasta': 7.0, 
+
+        'Juice': 3.0, 
+
+        'Scone': 2.7, 
+
+        'Iced Coffee': 3.0, 
+
+        'Cheesecake': 4.5, 
+
+        'Brownie': 3.2, 
+
+        'Milkshake': 4.2, 
+
+        'Tacos': 7.5, 
+
+        'Waffle': 5.0, 
+
+        'Dosa': 6.0, 
+
+        'Vadapav': 1.8 
+
+    } 
+
+     
+
+    print("Welcome to the Cafe!") 
+
+    display_menu(menu) 
+
+     
+
+    order = take_order(menu) 
+
+    generate_bill(menu, order) 
+
+  
+
+if __name__ == "__main__": 
+
+    cafe_management_system() 
+
+ 
